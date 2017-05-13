@@ -1,6 +1,8 @@
 let http = require('http');
 let fs = require('fs');
 
+let recourcesBase = './Resources/';
+
 function log(text) {
 	console.log((new Date()).toString() + ': ' + text);
 }
@@ -13,9 +15,9 @@ http.createServer((request, response) => {
 		var person = {};
 
 		try {
-			person = JSON.parse(fs.readFileSync('person.json'));
+			person = JSON.parse(fs.readFileSync(recourcesBase + 'person.json'));
 			if (person.image) {
-				person.image = fs.readFileSync(person.image, 'base64');
+				person.image = fs.readFileSync(recourcesBase + person.image, 'base64');
 			}
 		} catch (err) {
 			log('Error occured while loading person\'s data: ' + err.toString());
